@@ -1,35 +1,31 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { MovieProvider } from "./features/context/MovieProvider";
+import { useMoviesContext } from "./features/context/useMoviesContext";
 
-function App() {
-  const [count, setCount] = useState(0)
+function AppContent() {
+  const { state, dispatch } = useMoviesContext();
+  const { query } = state;
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <h1>Search Movies</h1>
+      <input
+        value={query}
+        onChange={(e) =>
+          dispatch({ type: "setQuery", payload: e.target.value })
+        }
+      />
+      <h2>Movies List</h2>
+      <ul></ul>
+      <h2>Watchlist</h2>
+      <ul></ul>
     </>
-  )
+  );
 }
 
-export default App
+export default function App() {
+  return (
+    <MovieProvider>
+      <AppContent />
+    </MovieProvider>
+  );
+}
