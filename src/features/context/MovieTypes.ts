@@ -1,8 +1,8 @@
 export interface Movie {
-  id: string;
-  title: string;
-  year: string;
-  poster: string;
+  imdbID: string;
+  Title: string;
+  Year: string;
+  Poster: string;
 }
 
 export interface State {
@@ -12,6 +12,7 @@ export interface State {
   selectedId: string | null;
   isLoading: boolean;
   error: string;
+  tab: "search" | "watchlist";
 }
 
 export type Action =
@@ -22,7 +23,8 @@ export type Action =
   | { type: "closeMovie" }
   | { type: "addToWatchlist"; payload: Movie }
   | { type: "removeFromWatchlist"; payload: string }
-  | { type: "setQuery"; payload: string };
+  | { type: "setQuery"; payload: string }
+  | { type: "switchTab"; payload: "search" | "watchlist" };
 
 export const initialState: State = {
   movies: [],
@@ -31,6 +33,7 @@ export const initialState: State = {
   selectedId: null,
   isLoading: false,
   error: "",
+  tab: "search",
 };
 
 export function reducer(state: State, action: Action): State {
@@ -51,11 +54,14 @@ export function reducer(state: State, action: Action): State {
       return {
         ...state,
         watchlist: state.watchlist.filter(
-          (movie) => movie.id !== action.payload
+          (movie) => movie.imdbID !== action.payload
         ),
       };
     case "setQuery":
       return { ...state, query: action.payload };
+    case "switchTab":
+      return { ...state, tab: action.payload };
+
     default:
       throw new Error("Unknown action type");
   }
