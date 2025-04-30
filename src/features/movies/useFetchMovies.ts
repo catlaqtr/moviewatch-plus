@@ -14,9 +14,6 @@ function useFetchMovies(query: string, dispatch: React.Dispatch<Action>) {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
-        console.log(data.Search);
-
         if (data.Response === "False") {
           dispatch({ type: "searchError", payload: "Movie not found" });
         } else {

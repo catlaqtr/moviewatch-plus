@@ -13,6 +13,7 @@ export interface State {
   isLoading: boolean;
   error: string;
   tab: "search" | "watchlist";
+  minYear: number;
 }
 
 export type Action =
@@ -24,7 +25,8 @@ export type Action =
   | { type: "addToWatchlist"; payload: Movie }
   | { type: "removeFromWatchlist"; payload: string }
   | { type: "setQuery"; payload: string }
-  | { type: "switchTab"; payload: "search" | "watchlist" };
+  | { type: "switchTab"; payload: "search" | "watchlist" }
+  | { type: "setMinYear"; payload: number };
 
 export const initialState: State = {
   movies: [],
@@ -34,6 +36,7 @@ export const initialState: State = {
   isLoading: false,
   error: "",
   tab: "search",
+  minYear: 1950,
 };
 
 export function reducer(state: State, action: Action): State {
@@ -49,7 +52,10 @@ export function reducer(state: State, action: Action): State {
     case "closeMovie":
       return { ...state, selectedId: null };
     case "addToWatchlist":
+      if (state.watchlist.some((m) => m.imdbID === action.payload.imdbID))
+        return state;
       return { ...state, watchlist: [...state.watchlist, action.payload] };
+
     case "removeFromWatchlist":
       return {
         ...state,
@@ -57,6 +63,9 @@ export function reducer(state: State, action: Action): State {
           (movie) => movie.imdbID !== action.payload
         ),
       };
+    case "setMinYear":
+      return { ...state, minYear: action.payload };
+
     case "setQuery":
       return { ...state, query: action.payload };
     case "switchTab":
