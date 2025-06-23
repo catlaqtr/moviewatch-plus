@@ -1,1 +1,5 @@
 @import "tailwindcss";
+
+body {
+  @apply min-h-screen bg-gradient-to-b from-gray-900 to-gray-700;
+}

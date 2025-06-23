@@ -16,7 +16,7 @@ function Watchlist() {
         {count !== 1 ? "s" : ""} in your watchlist {emoji}
       </div>
 
-      <ul className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
+      <ul className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full mb-6">
         {watchlist.map((movie) => (
           <MovieItem key={movie.imdbID} movie={movie} />
         ))}

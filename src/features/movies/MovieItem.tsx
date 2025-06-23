@@ -12,13 +12,19 @@ function MovieItem({ movie }: { movie: Movie }) {
   }
 
   return (
-    <div className="bg-gray-800 rounded-lg overflow-hidden shadow-md hover:scale-105 transition-transform duration-300 p-4">
+    <div className="bg-gray-800 rounded-lg overflow-hidden shadow-md hover:scale-105 transition-transform duration-300 p-4 border border-gray-700">
       <img
         className="w-full h-64 object-cover rounded"
-        src={movie.Poster}
+        src={
+          movie.Poster !== "N/A"
+            ? movie.Poster
+            : "https://via.placeholder.com/300x450?text=No+Image"
+        }
         alt={movie.Title}
       />
-      <h3 className="text-lg font-semibold mt-2">{movie.Title}</h3>
+      <h3 className="text-lg font-semibold mt-2 truncate" title={movie.Title}>
+        {movie.Title}
+      </h3>
       <p className="text-sm text-gray-400">{movie.Year}</p>
 
       {isInWatchlist ? (

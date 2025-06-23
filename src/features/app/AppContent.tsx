@@ -39,17 +39,17 @@ function AppContent() {
   }, [state.isLoading]);
 
   return (
-    <div className="flex flex-col items-center gap-8 pt-8 text-white min-h-screen p-4 text-center mx-auto max-w-2xl bg-gradient-to-b from-gray-900 to-gray-700">
+    <div className="flex flex-col items-center gap-8 pt-8 text-white min-h-screen p-4 text-center mx-auto max-w-2xl bg-gradient-to-b from-gray-900 to-gray-700 shadow-2xl border border-gray-800">
       <h1 className="text-3xl font-bold mb-4">Search Movies</h1>
       <div className="flex gap-4 mb-4">
         <button
-          className="px-4 py-2 rounded-full bg-indigo-600 hover:bg-indigo-700 transition-all"
+          className="px-4 py-2 rounded-full bg-indigo-600 hover:bg-indigo-700 transition-all focus:outline-none focus:ring-2 focus:ring-indigo-400"
           onClick={() => dispatch({ type: "switchTab", payload: "search" })}
         >
           Search Movies
         </button>
         <button
-          className="px-4 py-2 rounded-full bg-indigo-600 hover:bg-indigo-700 transition-all"
+          className="px-4 py-2 rounded-full bg-indigo-600 hover:bg-indigo-700 transition-all focus:outline-none focus:ring-2 focus:ring-indigo-400"
           onClick={() => dispatch({ type: "switchTab", payload: "watchlist" })}
         >
           Watchlist
