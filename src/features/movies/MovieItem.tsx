@@ -12,9 +12,9 @@ function MovieItem({ movie }: { movie: Movie }) {
   }
 
   return (
-    <div className="bg-gray-800 rounded-lg overflow-hidden shadow-md hover:scale-105 transition-transform duration-300 p-4 border border-gray-700">
+    <div className="overflow-hidden p-4 transition-transform duration-300 hover:-translate-y-0.5 rounded-2xl border border-gray-700/60 bg-gray-800/80 backdrop-blur shadow-xl">
       <img
-        className="w-full h-64 object-cover rounded"
+        className="w-full h-64 object-cover rounded-lg"
         src={
           movie.Poster !== "N/A"
             ? movie.Poster
@@ -22,7 +22,7 @@ function MovieItem({ movie }: { movie: Movie }) {
         }
         alt={movie.Title}
       />
-      <h3 className="text-lg font-semibold mt-2 truncate" title={movie.Title}>
+      <h3 className="text-lg font-semibold mt-3 truncate" title={movie.Title}>
         {movie.Title}
       </h3>
       <p className="text-sm text-gray-400">{movie.Year}</p>
@@ -30,14 +30,16 @@ function MovieItem({ movie }: { movie: Movie }) {
       {isInWatchlist ? (
         <button
           onClick={handleRemove}
-          className="mt-4 px-3 py-1 bg-red-500 hover:bg-red-600 text-white rounded-full text-sm transition-all"
+          aria-label={`Remove ${movie.Title} from watchlist`}
+          className="mt-4 inline-flex items-center justify-center gap-2 rounded-full px-4 py-2 font-semibold focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-300 text-white bg-red-500 hover:bg-red-600"
         >
           Remove from Watchlist ❌
         </button>
       ) : (
         <button
           onClick={() => dispatch({ type: "addToWatchlist", payload: movie })}
-          className="mt-4 px-3 py-1 bg-green-500 hover:bg-green-600 text-white rounded-full text-sm transition-all"
+          aria-label={`Add ${movie.Title} to watchlist`}
+          className="mt-4 inline-flex items-center justify-center gap-2 rounded-full px-4 py-2 font-semibold focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-300 text-white bg-green-500 hover:bg-green-600"
         >
           Add to Watchlist ⭐
         </button>

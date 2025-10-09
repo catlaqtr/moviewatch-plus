@@ -16,11 +16,17 @@ function Watchlist() {
         {count !== 1 ? "s" : ""} in your watchlist {emoji}
       </div>
 
-      <ul className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full mb-6">
-        {watchlist.map((movie) => (
-          <MovieItem key={movie.imdbID} movie={movie} />
-        ))}
-      </ul>
+      {count === 0 ? (
+        <p className="text-sm text-gray-400">
+          Your watchlist is empty. Add movies from the search tab.
+        </p>
+      ) : (
+        <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full mb-2">
+          {watchlist.map((movie) => (
+            <MovieItem key={movie.imdbID} movie={movie} />
+          ))}
+        </ul>
+      )}
     </div>
   );
 }

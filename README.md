@@ -1,54 +1,112 @@
-# React + TypeScript + Vite
+<div align="center">
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# MovieWatch Plus
 
-Currently, two official plugins are available:
+Search movies and build your personal watchlist with a clean, modern UI.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+</div>
 
-## Expanding the ESLint configuration
+## ✨ Features
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Fast search powered by OMDb API (with input debouncing)
+- Responsive grid layout (mobile → desktop)
+- Add/remove movies to your watchlist (stored in localStorage)
+- Filter by minimum release year
+- Polished dark theme with accessible focus states
+- Loading, error, and empty states handled gracefully
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## 🧰 Tech Stack
+
+- React 19 + TypeScript + Vite
+- Tailwind CSS v4 (via @tailwindcss/vite)
+- ESLint (flat config) with React + TypeScript rules
+
+## 🚀 Getting Started
+
+1. Install dependencies
+
+```powershell
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2. Start the dev server
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+```powershell
+npm run dev
 ```
+
+Open the URL shown in the terminal (default http://localhost:5173/).
+
+3. Build for production
+
+```powershell
+npm run build
+```
+
+4. Preview the production build (optional)
+
+```powershell
+npm run preview
+```
+
+## 🗂️ Project Structure
+
+```
+moviewatch-plus/
+├─ public/
+├─ src/
+│  ├─ features/
+│  │  ├─ app/AppContent.tsx
+│  │  ├─ context/
+│  │  │  ├─ MovieContext.ts
+│  │  │  ├─ MovieProvider.tsx
+│  │  │  ├─ MovieTypes.ts
+│  │  │  └─ useMoviesContext.ts
+│  │  └─ movies/
+│  │     ├─ MovieItem.tsx
+│  │     ├─ MovieList.tsx
+│  │     ├─ Watchlist.tsx
+│  │     └─ useFetchMovies.ts
+│  ├─ App.tsx
+│  ├─ main.tsx
+│  └─ index.css
+├─ vite.config.ts
+└─ package.json
+```
+
+## 🔑 Environment
+
+This project uses OMDb (demo key included in the code for convenience). For your own key:
+
+1. Get a free API key: http://www.omdbapi.com/apikey.aspx
+2. Replace the key in `src/features/movies/useFetchMovies.ts`.
+
+## 🧪 Useful Scripts
+
+- Dev: `npm run dev`
+- Build: `npm run build`
+- Preview: `npm run preview`
+- Lint: `npm run lint`
+
+## 🛟 Troubleshooting
+
+- “No CSS” or styles look missing in dev:
+
+  - Ensure `src/index.css` starts with `@import "tailwindcss";`
+  - Stop and restart the dev server after changing Tailwind-related files.
+  - Verify `vite.config.ts` includes `@tailwindcss/vite` in `plugins`.
+
+- Icons/emoji not rendering correctly:
+
+  - Windows Terminal/PowerShell fonts may vary; switch to a font with full emoji support.
+
+- CORS/network or empty results:
+  - OMDb free tier can rate-limit; try again or use your own key.
+
+## 📸 Screenshots
+
+Add screenshots to the `public/` folder and link them here.
+
+---
+
+MIT License
